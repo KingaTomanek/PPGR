@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int x, y;
+
+    cout << "Podaj x: ";
+    cin >> x;
+    cout << "Podaj y: ";
+    cin >> y;
+
+    for (int num = x; num <= y; num++) {
+        int divisors = 0;
+        for (int i = 2; i <= num / 2; i++) {
+            if (num % i == 0) {
+                divisors++;
+                break; 
+            }
+        }
+
+        if (divisors == 0 && num > 1) {
+            cout << num << "Jest liczbą pierwszą." << endl;
+        }
+    }
+
+    return 0;
+}
