@@ -1,0 +1,22 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    double x, y, z;
+    
+    cout << "Podaj pierwszy element ciągu arytmetycznego (x): ";
+    cin >> x;
+
+    cout << "Podaj różnicę ciągu arytmetycznego (y): ";
+    cin >> y;
+
+    cout << "Podaj liczbę elementów ciągu (z): ";
+    cin >> z;
+
+    double sum = (z / 2) * (2 * x + (z - 1) * y);
+
+    cout << "Suma ciągu arytmetycznego wynosi: " << sum << endl;
+
+    return 0;
+}
