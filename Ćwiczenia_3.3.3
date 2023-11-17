@@ -1,0 +1,64 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+    srand(time(0));
+
+    int playerChoice;
+    int computerChoice;
+
+    do
+    {
+        cout << "Wybierz:\n";
+        cout << "1. Kamień\n";
+        cout << "2. Papier\n";
+        cout << "3. Nożyce\n";
+        cout << "0. Zakończ grę\n";
+        cout << "Twój wybór: ";
+        cin >> playerChoice;
+
+        if (playerChoice == 0)
+        {
+            cout << "Koniec gry. Do zobaczenia!";
+            break;
+        }
+
+        computerChoice = rand() % 3 + 1;
+
+        cout << "Komputer wybrał: ";
+        switch (computerChoice)
+        {
+        case 1:
+            cout << "Kamień\n";
+            break;
+        case 2:
+            cout << "Papier\n";
+            break;
+        case 3:
+            cout << "Nożyce\n";
+            break;
+        }
+
+        if (playerChoice == computerChoice)
+        {
+            cout << "Remis!\n";
+        }
+        else if ((playerChoice == 1 && computerChoice == 3) ||
+                 (playerChoice == 2 && computerChoice == 1) ||
+                 (playerChoice == 3 && computerChoice == 2))
+        {
+            cout << "Wygrałeś!\n";
+        }
+        else
+        {
+            cout << "Przegrałeś.\n";
+        }
+
+    } while (true);
+
+    return 0;
+}
