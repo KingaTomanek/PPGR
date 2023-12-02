@@ -1,0 +1,54 @@
+#include <iostream>
+
+
+int global_array[] = {19, 8, 0, 1, 7, 3, 40, 15};
+
+
+void swap(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+
+int partition(int low, int high) {
+    int pivot = global_array[high]; 
+    int i = (low - 1); 
+    for (int j = low; j <= high - 1; j++) {
+       
+        if (global_array[j] <= pivot) {
+            i++;
+            swap(global_array[i], global_array[j]);
+        }
+    }
+
+    swap(global_array[i + 1], global_array[high]);
+    return (i + 1);
+}
+
+void quickSort(int low, int high) {
+    if (low < high) {
+        int pi = partition(low, high);
+
+        quickSort(low, pi - 1);
+        quickSort(pi + 1, high);
+    }
+}
+
+int main() {
+    int n = sizeof(global_array) / sizeof(global_array[0]);
+
+    std::cout << "Przed sortowaniem szybkim:" << std::endl;
+    for (int i = 0; i < n; i++) {
+        std::cout << global_array[i] << " ";
+    }
+
+    quickSort(0, n - 1);
+
+    std::cout << "\nPo sortowaniu szybkim:" << std::endl;
+    for (int i = 0; i < n; i++) {
+        std::cout << global_array[i] << " ";
+    }
+
+    return 0;
+}
