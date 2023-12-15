@@ -1,0 +1,81 @@
+#include <iostream>
+#include <cmath>
+
+const double PI = 3.14159265358979323846;
+
+double calculateArea(double side) {
+    return side * side;
+}
+
+double calculateArea(double length, double width) {
+    return length * width;
+}
+
+double calculateArea(double radius) {
+    return PI * pow(radius, 2);
+}
+
+double calculateArea(double side1, double side2, double side3) {
+    double s = (side1 + side2 + side3) / 2.0;
+    return sqrt(s * (s - side1) * (s - side2) * (s - side3));
+}
+
+int main() {
+    char choice;
+
+    do {
+        std::cout << "Wybierz figurę geometryczną:\n";
+        std::cout << "1. Kwadrat\n";
+        std::cout << "2. Prostokąt\n";
+        std::cout << "3. Koło\n";
+        std::cout << "4. Trójkąt\n";
+        std::cout << "5. Wyjście\n";
+        std::cout << "Twój wybór: ";
+        std::cin >> choice;
+
+        switch (choice) {
+            case '1': {
+                double side;
+                std::cout << "Podaj długość boku kwadratu: ";
+                std::cin >> side;
+                std::cout << "Pole kwadratu: " << calculateArea(side) << std::endl;
+                break;
+            }
+            case '2': {
+                double length, width;
+                std::cout << "Podaj długość prostokąta: ";
+                std::cin >> length;
+                std::cout << "Podaj szerokość prostokąta: ";
+                std::cin >> width;
+                std::cout << "Pole prostokąta: " << calculateArea(length, width) << std::endl;
+                break;
+            }
+            case '3': {
+                double radius;
+                std::cout << "Podaj promień koła: ";
+                std::cin >> radius;
+                std::cout << "Pole koła: " << calculateArea(radius) << std::endl;
+                break;
+            }
+            case '4': {
+                double side1, side2, side3;
+                std::cout << "Podaj długość pierwszego boku trójkąta: ";
+                std::cin >> side1;
+                std::cout << "Podaj długość drugiego boku trójkąta: ";
+                std::cin >> side2;
+                std::cout << "Podaj długość trzeciego boku trójkąta: ";
+                std::cin >> side3;
+                std::cout << "Pole trójkąta: " << calculateArea(side1, side2, side3) << std::endl;
+                break;
+            }
+            case '5':
+                std::cout << "Do widzenia!\n";
+                break;
+            default:
+                std::cout << "Nieprawidłowy wybór. Spróbuj ponownie.\n";
+        }
+
+    } while (choice != '5');
+
+    return 0;
+}
