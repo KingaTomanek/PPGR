@@ -1,3 +1,4 @@
+1)
 #include <iostream>
 #include <string>
 
@@ -20,6 +21,55 @@ int main() {
     std::cin >> osoba1.wiek;
 
     std::cout << "Osoba: " << osoba1.imie << " " << osoba1.nazwisko << ", Wiek: " << osoba1.wiek << " lat." << std::endl;
+
+    return 0;
+}
+2)
+#include <iostream>
+#include <string>
+#include <algorithm> 
+#include <vector>
+
+struct Osoba {
+    std::string imie;
+    std::string nazwisko;
+    int wiek;
+};
+
+bool porownajOsoby(const Osoba& osoba1, const Osoba& osoba2) {
+    if (osoba1.nazwisko != osoba2.nazwisko) {
+        return osoba1.nazwisko < osoba2.nazwisko;
+    } else if (osoba1.imie != osoba2.imie) {
+        return osoba1.imie < osoba2.imie;
+    } else {
+        return osoba1.wiek < osoba2.wiek;
+    }
+}
+
+int main() {
+    std::vector<Osoba> listaOsob;
+
+    for (int i = 0; i < 4; ++i) {
+        Osoba osoba;
+
+        std::cout << "Podaj imię osoby " << i + 1 << ": ";
+        std::cin >> osoba.imie;
+
+        std::cout << "Podaj nazwisko osoby " << i + 1 << ": ";
+        std::cin >> osoba.nazwisko;
+
+        std::cout << "Podaj wiek osoby " << i + 1 << ": ";
+        std::cin >> osoba.wiek;
+
+        listaOsob.push_back(osoba);
+    }
+
+    std::sort(listaOsob.begin(), listaOsob.end(), porownajOsoby);
+
+    std::cout << "Posortowane osoby:" << std::endl;
+    for (const auto& osoba : listaOsob) {
+        std::cout << osoba.imie << " " << osoba.nazwisko << ", Wiek: " << osoba.wiek << " lat." << std::endl;
+    }
 
     return 0;
 }
