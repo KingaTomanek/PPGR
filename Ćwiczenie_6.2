@@ -73,3 +73,66 @@ int main() {
 
     return 0;
 }
+
+3)
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+struct Osoba {
+    std::string imie;
+    std::string nazwisko;
+    int wiek;
+};
+
+bool porownajOsoby(const Osoba& osoba1, const Osoba& osoba2) {
+    if (osoba1.nazwisko != osoba2.nazwisko) {
+        return osoba1.nazwisko < osoba2.nazwisko;
+    } else if (osoba1.imie != osoba2.imie) {
+        return osoba1.imie < osoba2.imie;
+    } else {
+        return osoba1.wiek < osoba2.wiek;
+    }
+}
+
+void wyswietlTabliceOsob(const std::vector<Osoba>& listaOsob, int indeksA = 0, int indeksB = -1) {
+    if (indeksA > indeksB && indeksB != -1) {
+        std::cout << "Błędny zakres indeksów." << std::endl;
+        return;
+    }
+
+    if (indeksB == -1 || indeksB >= listaOsob.size()) {
+        indeksB = listaOsob.size() - 1;
+    }
+
+    for (int i = indeksA; i <= indeksB; ++i) {
+        std::cout << listaOsob[i].imie << " " << listaOsob[i].nazwisko << ", Wiek: " << listaOsob[i].wiek << " lat." << std::endl;
+    }
+}
+
+int main() {
+    std::vector<Osoba> listaOsob;
+
+    for (int i = 0; i < 4; ++i) {
+        Osoba osoba;
+
+        std::cout << "Podaj imię osoby " << i + 1 << ": ";
+        std::cin >> osoba.imie;
+
+        std::cout << "Podaj nazwisko osoby " << i + 1 << ": ";
+        std::cin >> osoba.nazwisko;
+
+        std::cout << "Podaj wiek osoby " << i + 1 << ": ";
+        std::cin >> osoba.wiek;
+
+        listaOsob.push_back(osoba);
+    }
+
+    std::sort(listaOsob.begin(), listaOsob.end(), porownajOsoby);
+
+    std::cout << "Posortowane osoby:" << std::endl;
+    wyswietlTabliceOsob(listaOsob);
+
+    return 0;
+}
