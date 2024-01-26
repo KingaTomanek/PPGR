@@ -1,0 +1,25 @@
+struct Punkt {
+    double x;
+    double y;
+};
+
+double obliczOdleglosc(Punkt p1, Punkt p2) {
+    double odleglosc = std::sqrt(std::pow(p2.x - p1.x, 2) + std::pow(p2.y - p1.y, 2));
+    return odleglosc;
+}
+
+int main() {
+    Punkt punkt1, punkt2;
+
+    std::cout << "Podaj wspolrzedne punktu 1 (x y): ";
+    std::cin >> punkt1.x >> punkt1.y;
+
+    std::cout << "Podaj wspolrzedne punktu 2 (x y): ";
+    std::cin >> punkt2.x >> punkt2.y;
+
+    double odleglosc = obliczOdleglosc(punkt1, punkt2);
+
+    std::cout << "Odległość między punktem 1 a punktem 2 wynosi: " << odleglosc << std::endl;
+
+    return 0;
+}
