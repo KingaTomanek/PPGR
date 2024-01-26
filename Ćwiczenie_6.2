@@ -298,3 +298,335 @@ int main() {
 
     return 0;
 }
+
+6)
+a- 
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+struct Osoba {
+    std::string imie;
+    std::string nazwisko;
+    int wiek;
+};
+
+bool porownajOsoby(const Osoba& osoba1, const Osoba& osoba2) {
+    if (osoba1.nazwisko != osoba2.nazwisko) {
+        return osoba1.nazwisko < osoba2.nazwisko;
+    } else if (osoba1.imie != osoba2.imie) {
+        return osoba1.imie < osoba2.imie;
+    } else {
+        return osoba1.wiek < osoba2.wiek;
+    }
+}
+
+void wyswietlTabliceOsob(const std::vector<Osoba>& listaOsob, int indeksA = 0, int indeksB = -1) {
+    if (indeksA > indeksB && indeksB != -1) {
+        std::cout << "Błędny zakres indeksów." << std::endl;
+        return;
+    }
+
+    if (indeksB == -1 || indeksB >= listaOsob.size()) {
+        indeksB = listaOsob.size() - 1;
+    }
+
+    for (int i = indeksA; i <= indeksB; ++i) {
+        std::cout << listaOsob[i].imie << " " << listaOsob[i].nazwisko << ", Wiek: " << listaOsob[i].wiek << " lat." << std::endl;
+    }
+}
+
+void wyswietlOsobyMlodszeNiz(const std::vector<Osoba>& listaOsob, int maksymalnyWiek) {
+    std::cout << "Osoby nie starsze niż " << maksymalnyWiek << " lat:" << std::endl;
+
+    for (const auto& osoba : listaOsob) {
+        if (osoba.wiek <= maksymalnyWiek) {
+            std::cout << osoba.imie << " " << osoba.nazwisko << ", Wiek: " << osoba.wiek << " lat." << std::endl;
+        }
+    }
+}
+
+int main() {
+    std::vector<Osoba> listaOsob;
+
+    int wybor;
+
+    do {
+        std::cout << "\n### MENU GŁÓWNE ###" << std::endl;
+        std::cout << "1. Dodaj osobę" << std::endl;
+        std::cout << "2. Wyświetl posortowane osoby" << std::endl;
+        std::cout << "3. Wyświetl osoby młodsze niż" << std::endl;
+        std::cout << "0. Zakończ program" << std::endl;
+
+        std::cout << "Wybierz opcję: ";
+        std::cin >> wybor;
+
+        switch (wybor) {
+            case 1: {
+                Osoba osoba;
+
+                std::cout << "Podaj imię: ";
+                std::cin >> osoba.imie;
+
+                std::cout << "Podaj nazwisko: ";
+                std::cin >> osoba.nazwisko;
+
+                std::cout << "Podaj wiek: ";
+                std::cin >> osoba.wiek;
+
+                listaOsob.push_back(osoba);
+
+                std::cout << "Osoba dodana." << std::endl;
+                break;
+            }
+            case 2:
+                std::sort(listaOsob.begin(), listaOsob.end(), porownajOsoby);
+                std::cout << "Posortowane osoby:" << std::endl;
+                wyswietlTabliceOsob(listaOsob);
+                break;
+
+            case 3: {
+                int maksymalnyWiek;
+                std::cout << "Podaj maksymalny wiek: ";
+                std::cin >> maksymalnyWiek;
+                wyswietlOsobyMlodszeNiz(listaOsob, maksymalnyWiek);
+                break;
+            }
+            case 0:
+                std::cout << "Zakończono program." << std::endl;
+                break;
+
+            default:
+                std::cout << "Błędny wybór. Spróbuj ponownie." << std::endl;
+        }
+    } while (wybor != 0);
+
+    return 0;
+}
+
+b- #include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+struct Osoba {
+    std::string imie;
+    std::string nazwisko;
+    int wiek;
+};
+
+bool porownajOsoby(const Osoba& osoba1, const Osoba& osoba2) {
+    if (osoba1.nazwisko != osoba2.nazwisko) {
+        return osoba1.nazwisko < osoba2.nazwisko;
+    } else if (osoba1.imie != osoba2.imie) {
+        return osoba1.imie < osoba2.imie;
+    } else {
+        return osoba1.wiek < osoba2.wiek;
+    }
+}
+
+void wyswietlTabliceOsob(const std::vector<Osoba>& listaOsob, int indeksA = 0, int indeksB = -1) {
+    if (indeksA > indeksB && indeksB != -1) {
+        std::cout << "Błędny zakres indeksów." << std::endl;
+        return;
+    }
+
+    if (indeksB == -1 || indeksB >= listaOsob.size()) {
+        indeksB = listaOsob.size() - 1;
+    }
+
+    for (int i = indeksA; i <= indeksB; ++i) {
+        std::cout << listaOsob[i].imie << " " << listaOsob[i].nazwisko << ", Wiek: " << listaOsob[i].wiek << " lat." << std::endl;
+    }
+}
+
+void wyswietlOsobyMlodszeNiz(const std::vector<Osoba>& listaOsob, int maksymalnyWiek) {
+    std::cout << "Osoby nie starsze niż " << maksymalnyWiek << " lat:" << std::endl;
+
+    for (const auto& osoba : listaOsob) {
+        if (osoba.wiek <= maksymalnyWiek) {
+            std::cout << osoba.imie << " " << osoba.nazwisko << ", Wiek: " << osoba.wiek << " lat." << std::endl;
+        }
+    }
+}
+
+int main() {
+    std::vector<Osoba> listaOsob;
+
+    int wybor;
+
+    do {
+        std::cout << "\n### MENU GŁÓWNE ###" << std::endl;
+        std::cout << "1. Dodaj osobę" << std::endl;
+        std::cout << "2. Wyświetl posortowane osoby" << std::endl;
+        std::cout << "3. Wyświetl osoby młodsze niż" << std::endl;
+        std::cout << "0. Zakończ program" << std::endl;
+
+        std::cout << "Wybierz opcję: ";
+        std::cin >> wybor;
+
+        switch (wybor) {
+            case 1: {
+                Osoba osoba;
+
+                std::cout << "Podaj imię: ";
+                std::cin >> osoba.imie;
+
+                std::cout << "Podaj nazwisko: ";
+                std::cin >> osoba.nazwisko;
+
+                std::cout << "Podaj wiek: ";
+                std::cin >> osoba.wiek;
+
+                listaOsob.push_back(osoba);
+
+                std::cout << "Osoba dodana." << std::endl;
+                break;
+            }
+            case 2:
+                std::sort(listaOsob.begin(), listaOsob.end(), porownajOsoby);
+                std::cout << "Posortowane osoby:" << std::endl;
+                wyswietlTabliceOsob(listaOsob);
+                break;
+
+            case 3: {
+                int maksymalnyWiek;
+                std::cout << "Podaj maksymalny wiek: ";
+                std::cin >> maksymalnyWiek;
+                wyswietlOsobyMlodszeNiz(listaOsob, maksymalnyWiek);
+                break;
+            }
+            case 0:
+                std::cout << "Zakończono program." << std::endl;
+                break;
+
+            default:
+                std::cout << "Błędny wybór. Spróbuj ponownie." << std::endl;
+        }
+
+    } while (wybor != 0);
+
+    return 0;
+}
+
+c-#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+struct Osoba {
+    std::string imie;
+    std::string nazwisko;
+    int wiek;
+};
+
+bool porownajOsoby(const Osoba& osoba1, const Osoba& osoba2) {
+    if (osoba1.nazwisko != osoba2.nazwisko) {
+        return osoba1.nazwisko < osoba2.nazwisko;
+    } else if (osoba1.imie != osoba2.imie) {
+        return osoba1.imie < osoba2.imie;
+    } else {
+        return osoba1.wiek < osoba2.wiek;
+    }
+}
+
+void wyswietlTabliceOsob(const std::vector<Osoba>& listaOsob, int indeksA = 0, int indeksB = -1) {
+    if (indeksA > indeksB && indeksB != -1) {
+        std::cout << "Błędny zakres indeksów." << std::endl;
+        return;
+    }
+
+    if (indeksB == -1 || indeksB >= listaOsob.size()) {
+        indeksB = listaOsob.size() - 1;
+    }
+
+    for (int i = indeksA; i <= indeksB; ++i) {
+        std::cout << listaOsob[i].imie << " " << listaOsob[i].nazwisko << ", Wiek: " << listaOsob[i].wiek << " lat." << std::endl;
+    }
+}
+
+void wyswietlOsobyMlodszeNiz(const std::vector<Osoba>& listaOsob, int maksymalnyWiek) {
+    std::cout << "Osoby nie starsze niż " << maksymalnyWiek << " lat:" << std::endl;
+
+    for (const auto& osoba : listaOsob) {
+        if (osoba.wiek <= maksymalnyWiek) {
+            std::cout << osoba.imie << " " << osoba.nazwisko << ", Wiek: " << osoba.wiek << " lat." << std::endl;
+        }
+    }
+}
+
+int main() {
+    std::vector<Osoba> listaOsob;
+
+    int wybor;
+
+    do {
+        std::cout << "\n### MENU GŁÓWNE ###" << std::endl;
+        std::cout << "1. Dodaj osobę" << std::endl;
+        std::cout << "2. Wyświetl posortowane osoby" << std::endl;
+        std::cout << "3. Wyświetl osoby młodsze niż" << std::endl;
+        std::cout << "4. Wybierz wszystkie osoby" << std::endl;
+        std::cout << "5. Wybierz część osób" << std::endl;
+        std::cout << "0. Zakończ program" << std::endl;
+
+        std::cout << "Wybierz opcję: ";
+        std::cin >> wybor;
+
+        switch (wybor) {
+            case 1: {
+                Osoba osoba;
+
+                std::cout << "Podaj imię: ";
+                std::cin >> osoba.imie;
+
+                std::cout << "Podaj nazwisko: ";
+                std::cin >> osoba.nazwisko;
+
+                std::cout << "Podaj wiek: ";
+                std::cin >> osoba.wiek;
+
+                listaOsob.push_back(osoba);
+
+                std::cout << "Osoba dodana." << std::endl;
+                break;
+            }
+            case 2:
+                std::sort(listaOsob.begin(), listaOsob.end(), porownajOsoby);
+                std::cout << "Posortowane osoby:" << std::endl;
+                wyswietlTabliceOsob(listaOsob);
+                break;
+
+            case 3: {
+                int maksymalnyWiek;
+                std::cout << "Podaj maksymalny wiek: ";
+                std::cin >> maksymalnyWiek;
+                wyswietlOsobyMlodszeNiz(listaOsob, maksymalnyWiek);
+                break;
+            }
+            case 4:
+                std::cout << "Wszystkie osoby:" << std::endl;
+                wyswietlTabliceOsob(listaOsob);
+                break;
+
+            case 5: {
+                int indeksA, indeksB;
+                std::cout << "Podaj indeks początkowy: ";
+                std::cin >> indeksA;
+                std::cout << "Podaj indeks końcowy: ";
+                std::cin >> indeksB;
+                wyswietlTabliceOsob(listaOsob, indeksA, indeksB);
+                break;
+            }
+            case 0:
+                std::cout << "Zakończono program." << std::endl;
+                break;
+
+            default:
+                std::cout << "Błędny wybór. Spróbuj ponownie." << std::endl;
+        }
+
+    } while (wybor != 0);
+
+    return 0;
+}
