@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+
+struct Osoba {
+    std::string imie;
+    std::string nazwisko;
+    int wiek;
+};
+
+int main() {
+    Osoba osoba1;
+
+    std::cout << "Podaj imię: ";
+    std::cin >> osoba1.imie;
+
+    std::cout << "Podaj nazwisko: ";
+    std::cin >> osoba1.nazwisko;
+
+    std::cout << "Podaj wiek: ";
+    std::cin >> osoba1.wiek;
+
+    std::cout << "Osoba: " << osoba1.imie << " " << osoba1.nazwisko << ", Wiek: " << osoba1.wiek << " lat." << std::endl;
+
+    return 0;
+}
